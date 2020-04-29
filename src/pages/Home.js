@@ -12,7 +12,6 @@ function Home() {
 
              <FormConsult/>
 
-
             </Grid>
 
            <Grid container xs={8} >
