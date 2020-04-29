@@ -1,10 +1,12 @@
 import React from 'react';
+import Countrie  from '../Countrie'
+import Styles from './Styles/styles.module.scss'
 
-
-const InfoCountries = () => {
+const InfoCountries = (props) => {
     return (
-        <div>
-            
+        <div  className={Styles.center}>
+
+            <Countrie/>
         </div>
     );
 };

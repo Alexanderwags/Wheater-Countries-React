@@ -1,0 +1,22 @@
+:local{
+
+   .center{
+       display: flex;
+       justify-content: center;
+       flex-direction: column;
+       align-items: center;
+   }
+   .yellow{
+       background-color: yellow;
+       height: 30px;
+   }
+   .gray{
+    background-color: gray;
+    height: 30px;
+    }
+    .blue{
+        background-color: lightskyblue;
+        height: 30px;
+    }
+
+}

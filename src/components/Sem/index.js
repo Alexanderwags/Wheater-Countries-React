@@ -1,11 +1,11 @@
 import React from 'react';
+import {Grid} from '@material-ui/core';
 
-
-const Sem = () => {
+const Sem = ({children}) => {
     return (
-        <div>
-            
-        </div>
+        <Grid container xs={12}>
+            {children}
+        </Grid>
     );
 };
 
