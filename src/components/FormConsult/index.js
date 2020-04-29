@@ -11,7 +11,7 @@ import {
 
 function FormConsult(props) {
   return (
-    <form onSubmit={props.getWheater}>
+    <form onSubmit={props.getWheaterr}>
       <h1 className={cn(Styles.w90, Styles.firsth1)}>Consulta De País</h1>
 
       <FormControl className={Styles.w90}>

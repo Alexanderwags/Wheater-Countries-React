@@ -4,13 +4,13 @@ import Day from "../components/Day";
 import { Grid } from "@material-ui/core";
 import InfoCountries from "../components/InfoCountries";
 import FormConsult from "../components/FormConsult";
-import GetWheater from "../Hooks/getWheater";
+import { getWheater } from "../Hooks/getWheater";
 function Home() {
   return (
     <>
       <Grid container xs={12}>
         <Grid container xs={4}>
-          <FormConsult getWheater={GetWheater} />
+          <FormConsult getWheaterr={getWheater} />
         </Grid>
 
         <Grid container xs={8}>
