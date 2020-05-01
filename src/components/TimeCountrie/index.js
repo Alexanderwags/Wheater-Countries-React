@@ -1,18 +1,20 @@
 import React from "react";
 import Styles from "./Styles/styles.module.scss";
 
-const TimeCountrie = ({ grad = "", cloudy = "", Humidty = "", wind = "" }) => {
+const TimeCountrie = (props) => {
   return (
     <div className={Styles.desc}>
-      <h1>{grad}</h1>
-      <h3>{cloudy}</h3>
-      <div>
-        <h3>Humidty</h3>
-        <h4>{grad}%</h4>
-      </div>
+      <h1>{props.temp}°</h1>
+      <h3>{props.desc}</h3>
       <div className={Styles.variables}>
-        <h3>wind</h3>
-        <h4>{wind}K/M</h4>
+        <div className={Styles.humidty}>
+          <h4>Humidty</h4>
+          <h4>{props.hum}%</h4>
+        </div>
+        <div className={Styles.wind}>
+          <h4>wind</h4>
+          <h4>{props.wind}K/M</h4>
+        </div>
       </div>
     </div>
   );

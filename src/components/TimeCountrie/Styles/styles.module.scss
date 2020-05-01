@@ -1,12 +1,36 @@
-:local{
+:local {
+  .desc {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 300px;
+    h1 {
+      font-weight: 500;
+      font-size: 3rem;
+      color: white;
+    }
+    h3 {
+      font-size: 1.5rem;
+      color: white;
+    }
+    h4 {
+      font-size: 1.3rem;
+      color: white;
+    }
+  }
+  .variables {
+    display: flex;
+    .humidty {
+      padding: 0 30px;
+      margin-top: 20px;
 
-    .desc{
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
+      border-right: 1px solid white;
     }
-    .variables{
-        display: flex;
+    .wind {
+      padding: 0 30px;
+      margin-top: 20px;
     }
+  }
 }

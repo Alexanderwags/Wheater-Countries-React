@@ -1,35 +1,65 @@
-import React from "react";
-import cn from "classnames";
+import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
 import Styles from "./Styles/styles.module.scss";
-import {
-  FormControl,
-  InputLabel,
-  Input,
-  FormHelperText,
-  Button,
-} from "@material-ui/core";
+import { FormControl, Button } from "@material-ui/core";
+import GetWheater from "../../Hooks/getWheater";
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
+}));
 
-function FormConsult(props) {
+export default function FormConsult(props) {
+  const classes = useStyles();
+  const [city, setcity] = useState("");
+  const [countrie, setcountrie] = useState("");
+
+  const handleSubmit = (e) => {
+    GetWheater(e, city, countrie);
+  };
+
   return (
-    <form onSubmit={props.getWheaterr}>
-      <h1 className={cn(Styles.w90, Styles.firsth1)}>Consulta De País</h1>
-
+    <form
+      className={classes.root}
+      noValidate
+      autoComplete="off"
+      onSubmit={(e) => {
+        return [e.preventDefault(), city];
+      }}
+    >
       <FormControl className={Styles.w90}>
-        <InputLabel htmlFor="ci">Ciudad</InputLabel>
-        <Input id="ci" type="text" aria-describedby="ci-helper" />
-        <FormHelperText id="ci-helper">Ingresa Ciudad</FormHelperText>
+        <TextField
+          required
+          id="standard-required"
+          label="Required"
+          value={city}
+          onChange={(e) => setcity(e.target.value)}
+          placeholder="Ingresa Ciudad"
+        />
       </FormControl>
       <FormControl className={Styles.w90}>
-        <InputLabel htmlFor="pa">Pais</InputLabel>
-        <Input id="pa" type="text" aria-describedby="pa-helper" />
-        <FormHelperText id="pa-helper">Ingresa Pais</FormHelperText>
+        <TextField
+          required
+          id="standard-required"
+          label="Required"
+          value={countrie}
+          onChange={(e) => setcountrie(e.target.value)}
+          placeholder="Ingresa Pais"
+        />
       </FormControl>
 
-      <Button variant="contained" color="primary" className={Styles.w90}>
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        className={Styles.w90}
+      >
         Enviar
       </Button>
     </form>
   );
 }
-
-export default FormConsult;

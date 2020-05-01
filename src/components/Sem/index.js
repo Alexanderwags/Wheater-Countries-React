@@ -1,15 +1,12 @@
-import React from 'react';
-import {Grid} from '@material-ui/core';
-
-const Sem = ({children}) => {
-    return (
-        <Grid container xs={12}>
-            {children}
-        </Grid>
-    );
+import React from "react";
+import { Grid } from "@material-ui/core";
+import Styles from "./Styles/styles.module.scss";
+const Sem = ({ children }) => {
+  return (
+    <Grid container xs={12} className={Styles.cont}>
+      {children}
+    </Grid>
+  );
 };
-
-
-
 
 export default Sem;
