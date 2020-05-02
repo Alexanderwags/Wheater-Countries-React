@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Styles from "./Styles/styles.module.scss";
 import { FormControl, Button } from "@material-ui/core";
 import GetWheater from "../../Hooks/getWheater";
+import PropTypes from "prop-types";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FormConsult(props) {
+export default function FormConsult({ SearchData }) {
   const classes = useStyles();
   const [city, setcity] = useState("");
   const [countrie, setcountrie] = useState("");
@@ -63,3 +64,7 @@ export default function FormConsult(props) {
     </form>
   );
 }
+
+FormConsult.propTypes = {
+  SearchData: PropTypes.func.isRequired,
+};
