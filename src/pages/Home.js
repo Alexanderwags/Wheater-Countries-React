@@ -21,7 +21,9 @@ function Home(props) {
   function SearchData(ci, pa, datday, datimg, datwheater) {
     console.log("city: ", ci, " countrie: ", pa);
     // eslint-disable-next-line no-unused-expressions
-    setTemp(datwheater[0].grad);
+    const t = datwheater[0].grad;
+
+    setTemp(t.toFixed(1));
     setDesc(datwheater[0].desc);
     setWind(datwheater[0].wind);
     setHum(datwheater[0].hum);
@@ -79,7 +81,6 @@ function Home(props) {
         direction="row"
         justify="center"
         alignItems="center"
-        item={true}
       >
         <FormConsult SearchData={SearchData} />
       </Grid>
