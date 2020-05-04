@@ -1,18 +1,42 @@
 import { useState, useEffect } from "react";
 
-const GetData = ({ API_URL }) => {
-  const [Data, setData] = useState([]);
+export function useGetData(API, city, countrie, band) {
+  const [data, setData] = useState([]);
+
   useEffect(() => {
-    async function Get(e) {
-      e.preventDefault();
-      const response = await fetch(API_URL);
-      setData(await response.json());
+    async function Data() {
+      try {
+        const response = await fetch(API);
+
+        setData(await response.json());
+        //console.log(data);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        band = true;
+      } catch (error) {
+        console.log("null");
+      }
     }
-    Get();
-  }, []);
-  return Data;
-};
-function load(dataday) {
+    band ? Data() : console.log("");
+  }, [API, band, city, countrie, data]);
+  return [data, band];
+}
+export function loadcountrie(datacountrie) {
+  let grad = datacountrie.main.temp - 273.15;
+  grad.toFixed(1);
+  let wheater = [
+    {
+      grad: grad,
+      desc: datacountrie.weather[0].description,
+      hum: datacountrie.main.humidity,
+      wind: datacountrie.wind.speed,
+    },
+  ];
+  return wheater;
+}
+export function loadimg(dataimg) {
+  return [dataimg.name, dataimg.flag];
+}
+export function loadDay(dataday) {
   let datos = [
     {
       id: "1",
@@ -52,4 +76,3 @@ function load(dataday) {
   ];
   return datos;
 }
-export default [GetData, load];

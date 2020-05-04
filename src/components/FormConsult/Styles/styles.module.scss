@@ -1,10 +1,12 @@
-:local{
-    .w90{
-        width: 90%;
-    }
-    .secondp{
-        text-align: left;
-        color: gray;
-    }
-  
+:local {
+  .w90 {
+    width: 90%;
+  }
+  .secondp {
+    text-align: left;
+    color: gray;
+  }
+  .w100 {
+    width: auto !important;
+  }
 }

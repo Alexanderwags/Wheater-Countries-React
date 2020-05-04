@@ -3,8 +3,16 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Styles from "./Styles/styles.module.scss";
 import { FormControl, Button } from "@material-ui/core";
-import GetWheater from "../../Hooks/getWheater";
+// eslint-disable-next-line no-unused-vars
+import {
+  useGetData,
+  loadDay,
+  loadimg,
+  loadcountrie,
+} from "../../Hooks/useGetData.js";
 import PropTypes from "prop-types";
+import WEATHER_KEY from "../../Key";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -18,38 +26,90 @@ export default function FormConsult({ SearchData }) {
   const classes = useStyles();
   const [city, setcity] = useState("");
   const [countrie, setcountrie] = useState("");
+  const [band, setBand] = useState(false);
+  const [band1, setBand1] = useState(false);
+  const [band2, setBand2] = useState(false);
+  //const [enc, setEnc] = useState(false);
+  const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countrie}&appid=${WEATHER_KEY}`;
+  const API_URL_IMG = `https://restcountries.eu/rest/v2/alpha/${countrie}`;
+  const API_URL_DAY = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${WEATHER_KEY}`;
+  const [weather, estad1] = useGetData(API_URL, city, countrie, band);
+  // eslint-disable-next-line no-unused-vars
+  const [imgcountrie, estd2] = useGetData(API_URL_IMG, city, countrie, band1);
+  // eslint-disable-next-line no-unused-vars
+  const [wheaterday, estad3] = useGetData(API_URL_DAY, city, countrie, band2);
 
   const handleSubmit = (e) => {
-    GetWheater(e, city, countrie);
-  };
+    e.preventDefault();
 
+    try {
+      console.log("weather : ", weather);
+      console.log("imgcountrie : ", imgcountrie);
+      console.log("weatherday : ", wheaterday);
+      loadcountrie(weather);
+      const d = loadDay(wheaterday);
+      const i = loadimg(imgcountrie);
+      const c = loadcountrie(weather);
+      // console.log(d);
+      // console.log(i);
+      // console.log(c);
+
+      SearchData(city, countrie, d, i, c);
+    } catch (event) {
+      console.log(event.err);
+    }
+  };
+  function change() {
+    setBand(true);
+    setBand1(true);
+    setBand2(true);
+  }
+  function keyp(e) {
+    e.preventDefault();
+    setBand(true);
+    setBand1(true);
+    setBand2(true);
+  }
+
+  function onChangeCity(e) {
+    setcity(e.target.value);
+    setBand(false);
+    setBand1(false);
+    setBand2(false);
+  }
+  function onChangeCountrie(e) {
+    setcountrie(e.target.value);
+    setBand(false);
+    setBand1(false);
+    setBand2(false);
+  }
   return (
     <form
       className={classes.root}
       noValidate
       autoComplete="off"
-      onSubmit={(e) => {
-        return [e.preventDefault(), city];
-      }}
+      onSubmit={handleSubmit}
     >
       <FormControl className={Styles.w90}>
         <TextField
           required
+          className={Styles.w100}
           id="standard-required"
-          label="Required"
+          label="Ingresa Ciudad"
           value={city}
-          onChange={(e) => setcity(e.target.value)}
+          onChange={onChangeCity}
           placeholder="Ingresa Ciudad"
         />
       </FormControl>
       <FormControl className={Styles.w90}>
         <TextField
+          className={Styles.w100}
           required
           id="standard-required"
-          label="Required"
+          label="Ingresa sigla Pais"
           value={countrie}
-          onChange={(e) => setcountrie(e.target.value)}
-          placeholder="Ingresa Pais"
+          onChange={onChangeCountrie}
+          placeholder="Ingresa sigla Pais ejemplos (col)"
         />
       </FormControl>
 
@@ -58,8 +118,10 @@ export default function FormConsult({ SearchData }) {
         variant="contained"
         color="primary"
         className={Styles.w90}
+        onMouseOver={change}
+        onKeyPress={keyp}
       >
-        Enviar
+        Buscar
       </Button>
     </form>
   );

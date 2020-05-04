@@ -3,27 +3,9 @@ import Sem from "../components/Sem";
 import Day from "../components/Day";
 import { Grid } from "@material-ui/core";
 import InfoCountries from "../components/InfoCountries";
-import { makeStyles } from "@material-ui/core/styles";
-import Styles from "../components/FormConsult/Styles/styles.module.scss";
-import {
-  FormControl,
-  Button,
-  InputLabel,
-  Input,
-  FormHelperText,
-} from "@material-ui/core";
-import WEATHER_KEY from "../Key";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "25ch",
-    },
-  },
-}));
+import FormConsult from "../components/FormConsult";
+
 function Home(props) {
-  const classes = useStyles();
-  const [city, setcity] = useState("");
   const [countrie, setcountrie] = useState("");
   const [temp, setTemp] = useState("");
   const [desc, setDesc] = useState("");
@@ -31,37 +13,26 @@ function Home(props) {
   const [wind, setWind] = useState("");
   const [band, setBand] = useState("");
   const [dataday, setDataDay] = useState([]);
+  // const [dataImg, setDataImg] = useState([]);
+  // const [datawheater, setDataWheater] = useState([]);
+
   const [enc, setEnc] = useState(false);
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let response, responseimg, responseday, data, dataimg;
-    if (city && countrie) {
-      // metric parameter is for Celcius Unit
-      setEnc(false);
 
-      const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countrie}&appid=${WEATHER_KEY}`;
-      const API_URL_IMG = `https://restcountries.eu/rest/v2/alpha/${countrie}`;
-      const API_URL_DAY = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${WEATHER_KEY}`;
-      try {
-        response = await fetch(API_URL);
-        responseimg = await fetch(API_URL_IMG);
-        responseday = await fetch(API_URL_DAY);
-        data = await response.json();
-        dataimg = await responseimg.json();
-        setDataDay(await responseday.json());
-
-        setEnc(true);
-        let grad = data.main.temp - 273.15;
-        setTemp(grad.toFixed(1));
-        setDesc(data.weather[0].description);
-        setHum(data.main.humidity);
-        setWind(data.wind.speed);
-        setBand(dataimg.flag);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  };
+  function SearchData(ci, pa, datday, datimg, datwheater) {
+    console.log("city: ", ci, " countrie: ", pa);
+    // eslint-disable-next-line no-unused-expressions
+    setTemp(datwheater[0].grad);
+    setDesc(datwheater[0].desc);
+    setWind(datwheater[0].wind);
+    setHum(datwheater[0].hum);
+    setcountrie(datimg[0]);
+    setBand(datimg[1]);
+    setDataDay(datday);
+    //setDataImg(datimg);
+    //setDataWheater(datwheater);
+    console.log("success");
+    setEnc(true);
+  }
 
   return (
     <>
@@ -74,18 +45,28 @@ function Home(props) {
           countrie={countrie}
           band={band}
         />
-        <Grid container xs={12}>
-          <Grid container xs={12} sm={4}>
+        <Grid container xs={12} item={true}>
+          <Grid container xs={12} sm={4} item={true}>
             Twiteer
           </Grid>
 
-          <Grid container xs={12} sm={8}>
+          <Grid container xs={12} sm={8} item={true}>
             <Sem>
               {enc === true
-                ? load(dataday)
-                : ["monday", "tuesday", "wednesday", "thursday", "frifay"].map(
+                ? dataday.map((inf) => {
+                    return (
+                      <Day
+                        day={inf.day}
+                        grad={inf.temp}
+                        descrip={inf.descrip}
+                        desc={inf.descr}
+                        key={inf.id}
+                      />
+                    );
+                  })
+                : ["monday", "tuesday", "wednesday", "thursday", "friday"].map(
                     (e) => {
-                      return <Day day={e} key={e} grad="12" desc="clouds" />;
+                      return <Day day={e} key={e} grad="280" desc="clouds" />;
                     }
                   )}
             </Sem>
@@ -98,100 +79,12 @@ function Home(props) {
         direction="row"
         justify="center"
         alignItems="center"
+        item={true}
       >
-        <form
-          className={classes.root}
-          noValidate
-          autoComplete="off"
-          onSubmit={handleSubmit}
-        >
-          <FormControl className={Styles.w90}>
-            <InputLabel htmlFor="ca">Ingresa ciudad</InputLabel>
-            <Input
-              id="ca"
-              type="text"
-              aria-describedby="ca-helper"
-              value={city}
-              onChange={(e) => setcity(e.target.value)}
-            />
-            <FormHelperText id="ca-helper">
-              Ingresa capital de un pais
-            </FormHelperText>
-          </FormControl>
-          <FormControl className={Styles.w90}>
-            <InputLabel htmlFor="pa">Ingresa pais</InputLabel>
-            <Input
-              id="pa"
-              type="text"
-              aria-describedby="pa-helper"
-              value={countrie}
-              onChange={(e) => setcountrie(e.target.value)}
-            />
-            <FormHelperText id="pa-helper">Ingresa un pais</FormHelperText>
-          </FormControl>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={Styles.w90}
-          >
-            Buscar
-          </Button>
-        </form>
+        <FormConsult SearchData={SearchData} />
       </Grid>
     </>
   );
 }
-function load(dataday) {
-  let datos = [
-    {
-      id: "1",
-      day: "monday",
-      temp: dataday.list[0].main.temp,
-      descr: dataday.list[0].weather[0].main,
-      descrip: dataday.list[0].weather[0].description,
-    },
-    {
-      id: "2",
-      day: "tuesday",
-      temp: dataday.list[8].main.temp,
-      descr: dataday.list[8].weather[0].main,
-      descrip: dataday.list[8].weather[0].description,
-    },
-    {
-      id: "3",
-      day: "wednesday",
-      temp: dataday.list[16].main.temp,
-      descr: dataday.list[16].weather[0].main,
-      descrip: dataday.list[16].weather[0].description,
-    },
-    {
-      id: "4",
-      day: "thursday",
-      temp: dataday.list[24].main.temp,
-      descr: dataday.list[24].weather[0].main,
-      descrip: dataday.list[24].weather[0].description,
-    },
-    {
-      id: "5",
-      day: "friday",
-      temp: dataday.list[32].main.temp,
-      descr: dataday.list[32].weather[0].main,
-      descrip: dataday.list[32].weather[0].description,
-    },
-  ];
-  return datos.map((inf) => {
-    let g = inf.temp - 273.15;
 
-    return (
-      <Day
-        key={inf.id}
-        grad={g.toFixed(1)}
-        day={inf.day}
-        desc={inf.descr}
-        descrip={inf.descrip}
-      />
-    );
-  });
-}
 export default Home;
