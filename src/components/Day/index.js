@@ -15,7 +15,7 @@ const Day = ({
   let temp = grad - 273.15;
 
   return (
-    <Grid container xs={12} sm={2} item={true}>
+    <Grid container xs={6} sm={2} item={true} className={Styles.center}>
       <div className={Styles.center}>
         <h1>{day}</h1>
         {desc === "Rain" ? (
@@ -25,17 +25,17 @@ const Day = ({
         ) : desc === "Sun" ? (
           <WbSunnyIcon
             key={id}
-            style={{ color: "yellow", width: "60px", height: "60px" }}
+            style={{ color: "yellow", width: "80px", height: "80px" }}
           />
         ) : desc === "Clouds" ? (
           <WbCloudyIcon
             key={id}
-            style={{ color: "gray", width: "60px", height: "60px" }}
+            style={{ color: "gray", width: "80px", height: "80px" }}
           />
         ) : (
           <WbCloudyIcon
             key={id}
-            style={{ color: "gray", width: "60px", height: "60px" }}
+            style={{ color: "gray", width: "80px", height: "80px" }}
           />
         )}
         <h1>{temp.toFixed(1)}°</h1>

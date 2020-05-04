@@ -34,7 +34,7 @@ export function loadcountrie(datacountrie) {
   return wheater;
 }
 export function loadimg(dataimg) {
-  return [dataimg.name, dataimg.flag];
+  return [dataimg.nativeName, dataimg.flag];
 }
 export function loadDay(dataday) {
   let datos = [

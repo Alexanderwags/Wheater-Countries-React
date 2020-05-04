@@ -1,0 +1,13 @@
+:local {
+  .center {
+    @media (min-width: 600px) {
+      height: 250px;
+    }
+    min-height: 250px;
+    height: 100%;
+    margin-top: 20px;
+    h1 {
+      color: #2a67a5;
+    }
+  }
+}

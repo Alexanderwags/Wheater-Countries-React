@@ -79,9 +79,9 @@ export default function FormConsult({ SearchData }) {
   }
   function onChangeCountrie(e) {
     setcountrie(e.target.value);
-    setBand(false);
-    setBand1(false);
-    setBand2(false);
+    // setBand(false);
+    // setBand1(false);
+    // setBand2(false);
   }
   return (
     <form
@@ -95,10 +95,10 @@ export default function FormConsult({ SearchData }) {
           required
           className={Styles.w100}
           id="standard-required"
-          label="Ingresa Ciudad"
+          label="Enter Capital City"
           value={city}
           onChange={onChangeCity}
-          placeholder="Ingresa Ciudad"
+          placeholder="Enter a city"
         />
       </FormControl>
       <FormControl className={Styles.w90}>
@@ -106,10 +106,10 @@ export default function FormConsult({ SearchData }) {
           className={Styles.w100}
           required
           id="standard-required"
-          label="Ingresa sigla Pais"
+          label="Enter acrony country"
           value={countrie}
           onChange={onChangeCountrie}
-          placeholder="Ingresa sigla Pais ejemplos (col)"
+          placeholder="Enter acrony country for example (col)"
         />
       </FormControl>
 
@@ -120,8 +120,9 @@ export default function FormConsult({ SearchData }) {
         className={Styles.w90}
         onMouseOver={change}
         onKeyPress={keyp}
+        style={{ background: "#2a67a5" }}
       >
-        Buscar
+        Search
       </Button>
     </form>
   );

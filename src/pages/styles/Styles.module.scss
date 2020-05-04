@@ -1,0 +1,27 @@
+:local {
+  .form {
+    width: 700px !important;
+    height: 300px;
+    background: white;
+    border-bottom: 0;
+
+    margin: 0 auto;
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 400px;
+    }
+  }
+  .border {
+    border-bottom: 0;
+  }
+  .centro {
+    margin-top: 30px;
+    @media (max-width: 599px) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
+}
