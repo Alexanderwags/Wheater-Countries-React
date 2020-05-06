@@ -10,4 +10,15 @@
       color: #2a67a5;
     }
   }
+  .cn {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: max-content;
+    width: 100%;
+    padding-left: 10px;
+    h1 {
+      margin-left: 30px;
+    }
+  }
 }

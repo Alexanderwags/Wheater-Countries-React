@@ -16,7 +16,7 @@ function Home(props) {
   const [wind, setWind] = useState("");
   const [band, setBand] = useState("");
   const [dataday, setDataDay] = useState([]);
-  // const [dataImg, setDataImg] = useState([]);
+  const [dataImg, setDataImg] = useState([]);
   // const [datawheater, setDataWheater] = useState([]);
 
   const [enc, setEnc] = useState(false);
@@ -34,7 +34,7 @@ function Home(props) {
     setBand(datimg[1]);
     setDataDay(datday);
     setcountrie1(countrie);
-    //setDataImg(datimg);
+    setDataImg(datimg);
     //setDataWheater(datwheater);
     console.log("success");
     setEnc(true);
@@ -43,19 +43,12 @@ function Home(props) {
   return (
     <>
       <Header countrie={countrie1} />
-      <Grid container xs={12} className={Styles.centro}>
-        <Grid
-          container
-          sm={4}
-          xs={12}
-          direction="row"
-          justify="center"
-          alignItems="center"
-          className={Styles.form}
-        >
+      <h1 className={Styles.time}>Online Wheater </h1>
+      <Grid container={true} xs={12} className={Styles.centro}>
+        <Grid item={true} xs={12} sm={4} className={Styles.form}>
           <FormConsult SearchData={SearchData} />
         </Grid>
-        <Grid container xs={12} sm={8} className={Styles.border}>
+        <Grid item={true} xs={12} sm={8} className={Styles.border}>
           <InfoCountries
             temp={temp}
             hum={hum}
@@ -66,12 +59,12 @@ function Home(props) {
           />
         </Grid>
       </Grid>
-      <Grid container xs={12} item={true}>
-        <Grid container xs={12} sm={4} item={true}>
+      <Grid container={true} xs={12}>
+        <Grid item={true} xs={12} sm={4}>
           <TwitterFeed countrie={countrie1} />
         </Grid>
 
-        <Grid container xs={12} sm={8} item={true}>
+        <Grid item={true} xs={12} sm={8}>
           <Sem>
             {enc === true
               ? dataday.map((inf) => {

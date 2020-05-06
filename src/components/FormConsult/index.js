@@ -41,7 +41,9 @@ export default function FormConsult({ SearchData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setBand(true);
+    setBand1(true);
+    setBand2(true);
     try {
       console.log("weather : ", weather);
       console.log("imgcountrie : ", imgcountrie);
@@ -60,15 +62,15 @@ export default function FormConsult({ SearchData }) {
     }
   };
   function change() {
-    setBand(true);
-    setBand1(true);
-    setBand2(true);
+    // setBand(true);
+    // setBand1(true);
+    // setBand2(true);
   }
   function keyp(e) {
     e.preventDefault();
-    setBand(true);
-    setBand1(true);
-    setBand2(true);
+    // setBand(true);
+    // setBand1(true);
+    // setBand2(true);
   }
 
   function onChangeCity(e) {

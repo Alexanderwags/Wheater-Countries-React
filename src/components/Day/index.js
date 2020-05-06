@@ -15,7 +15,7 @@ const Day = ({
   let temp = grad - 273.15;
 
   return (
-    <Grid container xs={6} sm={2} item={true} className={Styles.center}>
+    <Grid item={true} xs={6} sm={2} className={Styles.center}>
       <div className={Styles.center}>
         <h1>{day}</h1>
         {desc === "Rain" ? (

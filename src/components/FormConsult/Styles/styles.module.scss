@@ -1,12 +1,19 @@
 :local {
   .w90 {
-    width: 90%;
+    @media (min-width: 1200px) {
+      width: 90%;
+    }
+    @media (min-width: 600px) and (max-width: 1199px) {
+      width: 25ch;
+    }
   }
   .secondp {
     text-align: left;
     color: gray;
   }
   .w100 {
-    width: auto !important;
+    @media (min-width: 1200px) {
+      width: auto !important;
+    }
   }
 }
